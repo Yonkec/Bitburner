@@ -1,6 +1,7 @@
 /** @param {NS} ns */
 export async function main(ns) {
 
+    //slightly less basic hack script, waits to hack until the server is prepped fully.  Extremely inefficnet, but it works for now.
     var target = ns.args[0];
 
     while(true) {

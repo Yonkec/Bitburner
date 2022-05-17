@@ -1,6 +1,7 @@
 /** @param {NS} ns */
 export async function main(ns) {
-
+	//main script to run to hack/nuke servers then aim them at another for early cash.
+	//goal is to turn this into a monitoring script that initates this when appropriate and also controls everything else in early/mid/late game
 	let ratios = [.5,.2,.1];
 	const servers = JSON.parse(ns.read("Servers.txt"));
 	const victim = "joesguns"

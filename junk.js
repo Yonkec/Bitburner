@@ -1,6 +1,6 @@
 /** @param {NS} ns */
 export async function main(ns) {
-	
+	//random script messing w/ variables and returning useful info
     let server = "foodnstuff";
     let gr = ns.getScriptRam("grow.js");
     let wr = ns.getScriptRam("weaken.js");
