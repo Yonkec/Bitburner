@@ -14,7 +14,7 @@ export async function main(ns) {
 	}
 
 	function blacklist(server){
-		return (server != ".");
+		return (server != "."  && server != "darkweb");
 	}
 
 	await ns.write(file, JSON.stringify(servers), "w");

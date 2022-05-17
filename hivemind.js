@@ -9,7 +9,7 @@ export async function main(ns) {
     let exponent = 0;
     let ratios = [.6, .25, .1];
     let file = "botnet.txt";
-    let cashgoal = 5000000000;
+    let cashgoal = 1000000;
     const victims = JSON.parse(ns.read("Servers.txt"));
     await ns.sleep(1000);
     const scriptz = ["grow.js", "weaken.js", "hack.js"];
@@ -32,7 +32,7 @@ export async function main(ns) {
 
     
     await ns.sleep(3000);
-    let kv = 0;
+    let kv = 0, kdir = 0;
     let kmax = victims.length - 3;
     ns.tprint(kmax);
 
@@ -42,12 +42,13 @@ export async function main(ns) {
 
         if (goal == "h") {
             while (ns.getServerMaxMoney(victims[kv]) < cashgoal || ns.hasRootAccess(victims[kv]) == false || ns.hackAnalyzeChance(victims[kv]) < .5) {
-                kv++;
-                if (kv == kmax) {
-                    kv = 1;
-                }
+                //ns.tprint("kv: " + kv + " kdir: " + kdir + " kmax: " + kmax);
+                if (kv == kmax) {kdir = 1;}                   
+                else if ( kv == 0){kdir = 0;} 
+                if(kdir == 1){kv--;}
+                else{kv++;}
             }
-            await ns.sleep(100);
+            await ns.sleep(1000);
             ns.killall(servers[k]);
 
             for (let l = 0; l < scriptz.length; l++) {
@@ -56,7 +57,8 @@ export async function main(ns) {
             }
 
             ns.tprint(servers[k] + " MaxMon: " + ns.getServerMaxMoney(victims[kv]).toLocaleString('en-US') + " // " + victims[kv]);
-            kv++;
+            if(kdir == 1){kv--;}
+            else{kv++;}
         }
 
         else if (goal == "s") {
@@ -64,6 +66,8 @@ export async function main(ns) {
             await ns.scp("share.js", servers[k]);
             ns.exec("share.js", servers[k], Math.floor(servMaxRam / ns.getScriptRam("share.js")));
         }
+
+        else{return 0;}
 
     }
 }
