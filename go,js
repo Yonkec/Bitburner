@@ -12,7 +12,6 @@ export async function main(ns) {
     }
 
 
-
     //run hacknet.js -  don't run this after a yet to be determined threshold
     //run scanner.js
     //run pwn.js

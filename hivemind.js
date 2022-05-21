@@ -38,7 +38,6 @@ export async function main(ns) {
         servers = ns.getPurchasedServers();
     }
 
-    
     await ns.sleep(3000);
     let kv = 0, kdir = 0;
     let kmax = victims.length - 3;
@@ -51,7 +50,7 @@ export async function main(ns) {
         let servMaxRam = ns.getServerMaxRam(servers[k]);
 
         if (goal == "h") {
-            while (ns.getServerMaxMoney(victims[kv]) < cashgoal || ns.hasRootAccess(victims[kv]) == false || ns.hackAnalyzeChance(victims[kv]) < .5) {
+            while (ns.getServerMaxMoney(victims[kv]) < cashgoal || ns.hasRootAccess(victims[kv]) == false || ns.hackAnalyzeChance(victims[kv]) < .75) {
                 //ns.tprint("kv: " + kv + " kdir: " + kdir + " kmax: " + kmax);
                 if (kv == kmax) {kdir = 1;}                   
                 else if ( kv == 0){kdir = 0;} 
