@@ -5,7 +5,7 @@ export async function main(ns) {
     var target = ns.args[0];
 
     while(true) {
-            await ns.grow(target);
+            await ns.getser(target);
 	}
    
 }
