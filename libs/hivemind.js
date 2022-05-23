@@ -18,7 +18,7 @@ export async function hivemind(ns, goal, exponent, cashgoal, victims) {
 
     await ns.sleep(3000);
     let kv = 0, kdir = 0;
-    let kmax = victims.length - 3;
+    let kmax = victims.length-1;
 
     //FOR EACH PURCHASED SERVER iterate through the target lists, ignoring servers deemed too low or that are not yet hacked.
     //if we get to the end of the target list without finding any acceptable servers, turn around and go backwards through the list
@@ -29,9 +29,11 @@ export async function hivemind(ns, goal, exponent, cashgoal, victims) {
         if (goal == "h") {
             while (ns.getServerMaxMoney(victims[kv]) < cashgoal 
             || ns.hasRootAccess(victims[kv]) == false 
-            || ns.hackAnalyzeChance(victims[kv]) < .75) {
-                if (kv == kmax) {kdir = 1;}                   
-                else if ( kv == 0){kdir = 0;} 
+            || ns.hackAnalyzeChance(victims[kv]) < .75
+            || victims[kv] == "n00dles"
+            || victims[kv] == "joesguns") {
+                if (kv >= kmax) {kdir = 1;}                   
+                else if ( kv <= 0){kdir = 0;} 
                 if(kdir == 1){kv--;}
                 else{kv++;}
             }
@@ -42,8 +44,9 @@ export async function hivemind(ns, goal, exponent, cashgoal, victims) {
                 await ns.scp(scriptz[l], servers[k]);
                 ns.exec(scriptz[l], servers[k], Math.ceil((servMaxRam * ratios[l]) / ns.getScriptRam(scriptz[l])), victims[kv]);
             }
-            //confirmation as to which server is targeted
+            //confirmation as to which server is targeted - can get rid of this later.
             ns.tprint(servers[k] + " MaxMon: " + ns.getServerMaxMoney(victims[kv]).toLocaleString('en-US') + " // " + victims[kv]);
+            if(kv >= kmax){kdir = 1;}  
             if(kdir == 1){kv--;}
             else{kv++;}
         }

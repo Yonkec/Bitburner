@@ -9,8 +9,8 @@ export async function main(ns) {
     //determine the goal of the iteration
     let goal = "";
     do {
-        goal = await ns.prompt("Hack or Share?", { type: "text" });
-    } while (goal != "h" && goal != "s"  && goal != "x");
+        goal = await ns.prompt("Hack Share or Regrow?", { type: "text" });
+    } while (goal != "h" && goal != "s"  && goal != "r" && goal != "q");
 
 	let servers = await serverList(ns);
 	
@@ -22,11 +22,16 @@ export async function main(ns) {
 
     if (ns.getPurchasedServers().length == 0){hivelvl = 8;}
 
+    if (goal== "r"){
+        await hivemind(ns, "h", hivelvl, 50000000, servers);
+        return 1;
+    }
+
     while(goal == "h"){
 
         level = ns.getHackingLevel();
 
-        if (tier <= level && tier < 1200){
+        if (tier <= level && tier < 3200){
             await pwn(ns, servers, victim);
             tier += level;
         }   
@@ -39,7 +44,9 @@ export async function main(ns) {
             await hivemind(ns, goal, hivelvl, cashgoal, servers);
             cashgoal *= 4;
         }
-        await ns.sleep(10000);
+        ns.tprint(hivelvl);
+        if(hivelvl == 23){ return 1;}   
+        await ns.sleep(60000);
     }
 
     if (goal == "s") {
