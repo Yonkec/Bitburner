@@ -2,9 +2,12 @@
 import { serverList } from "./libs/scan.js";
 import { pwn } from "./libs/pwn.js";
 import { hivemind } from "./libs/hivemind.js";
-import { hiveslay } from "libs/hiveslay.js";    
+import { hiveslay } from "libs/hiveslay.js";
+import { hacknet } from "libs/hacknet2.js"; 
 
 export async function main(ns) {
+
+    await hacknet(ns);
     
     //determine the goal of the iteration
     let goal = "";

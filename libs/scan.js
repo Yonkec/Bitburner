@@ -11,7 +11,7 @@ export async function serverList(ns,server="home", servers=[], filter=true){
 
 
     function blacklist(server){
-        return (server != "home" && server != "."  && server != "darkweb");
+        return (server != "."  && server != "darkweb");
     }
 
     function whalelist(server){
