@@ -5,7 +5,7 @@ export async function pwn(ns, servers, victim) {
 	//goal is to turn this into a monitoring script that initates this when appropriate and also controls everything else in early/mid/late game
 	let ratios = [.5,.2,.1];
 	if (ns.hasRootAccess(victim) == false){victim = "n00dles"}
-
+	
 	//iterates over each server in the servers file
 	for (let i = 0; i < servers.length; i++) {
 		
