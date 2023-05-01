@@ -1,1 +1,1 @@
-# Praise Whale.
+# Bitburner automations.
